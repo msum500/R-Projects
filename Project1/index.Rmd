@@ -1,0 +1,43 @@
+---
+title: "index.rmd"
+subtitle: "with a little bit of magick"
+author: "Matthew Sum"
+date: "2023-03-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE, echo = TRUE)
+```
+
+## My meme
+
+My meme represents myself when I do something dumb as I often make silly mistakes.
+The motivation of my meme is to show how my brain acts sometimes when doing daily activities.
+
+![Here is my meme](my_meme.png)
+```{r file='meme.R', eval=FALSE}
+
+```
+
+## My animated GIF
+
+My animated GIF shows a cat rotating 360 degrees and the text "MEOW" forming after each frame.
+The motivation of my GIF was to create something I thought was cute so I decided to use an image of a cat as the base of my GIF.
+
+![Here is my GIF](my_animation.gif)
+```{r file='animation.R', eval=FALSE}
+
+```
+
+```{css}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Mukta:wght@200&display=swap');
+p {font-family: 'Montserrat', sans-serif;
+}
+
+body {font-family: 'Mukta', sans-serif;
+      font-weight: bold;
+      background-color: #b0a382;
+}
+```
+

@@ -1,0 +1,29 @@
+---
+title: "report.rmd"
+author: "Matthew Sum"
+date: "2023-03-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Project requirements
+
+I have met the requirements of Github by creating a new repo called "stats220". 
+[My Repo](https://github.com/msum500/stats220)
+
+With Jekyll added to the root of my stats220 repo I was able to create a github page.
+[My Github Page](https://msum500.github.io/stats220/)
+
+![](screenshot.png)
+
+My project demonstrates creativity in my Meme where I used the function *image_flop* which has not been covered in the lectures yet, but is apart of the *magick* package.
+In my Animation I used the *image_rotate* function which is another function that has also not been covered in the lectures. These two functions made my meme and animation different to the ones covered in the lab and provided more character to my meme and gif.
+For my CSS I included more than 2 appearance changes: I changed the font, background-color, and made the body of my Rmd **bold**.
+
+
+## Learning reflection
+
+The first module, *Creating HTML by combining modern technologies*, taught me a valuable lesson about the flexibility of R-Studio. Initially, I believed that R was exclusively for statistical analysis. However, I was pleasantly surprised to learn that R has a wide range of capabilities beyond data analysis. Despite my prior experience with R, I had never utilized the magick package or uploaded images. Rather, my interactions with R were mostly focused on creating charts and drawing conclusions from data. This module sparked my interest in exploring GitHub further. I am interested by the platform's collaborative features, which enable individuals to collaborate on projects from any location. Additionally, GitHub's code-bugging functionality appears to be extremely useful, and I believe it will be valuable for future projects.
