@@ -1,0 +1,122 @@
+---
+title: "index.Rmd"
+author: "Matthew Sum"
+subtitle: "STATS 220 Semester One 2023"
+date: "2023-04-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+```
+
+## Introduction
+I created a playlist to be used for parties, focusing on the hip hop genre and ensuring that it only included songs from the music media. During the development process, I experimented with the term parameter by trying out different *terms* and checking the resulting data by printing the output and selecting the desired information. This process involved data manipulation to identify and filter the specific songs that fit the criteria I wanted for my playlist. I.e. I renamed the previous variables to new names that were more suitable to work with, created 3 new variables and made sure to only include unique artist in my final playlist of 20 songs only.
+```{r, message = FALSE}
+my_data <- read_csv("my_playlist.csv") 
+
+my_data%>%
+  knitr::kable()
+```
+Nested JSON can be advantageous because it allows for a hierarchical organisation of data, which can represent the relationships between different features and attributes of a song or album. I.e. all the values of a specific row is grouped together into one nest, making it easier to read and store the data. An example of Nested JSON for a specific attribute of a song is the album the song belongs to, whether it was released as a single or as part of an album. Nested JSON can easily present the information needed, with additional details such as genre, price, album track number, and more. This allows for a more detailed representation of the song and album, which can be used for more complex analysis or filtering of the data.
+
+## Key features of my playlist
+
+```{r, message=FALSE}
+my_data <- read_csv("my_playlist.csv") 
+
+artist_data <- my_data %>%
+  mutate(num_artists = str_count(artist, "&") + 1) %>%
+  mutate(multiple_artists = ifelse(num_artists >= 2, "yes", "no"))
+artist_data %>%
+  ggplot() +
+  geom_bar(aes(x = multiple_artists)) +
+  labs(title = "Songs that have more than ONE artist")
+
+my_data %>%
+  ggplot() +
+  geom_point(aes(x = dateReleased,
+               y = genre)) +
+  labs(title = "date released vs genre",
+       x = "Dates", y = "Genre")
+
+
+my_data %>%
+  ggplot() +
+  geom_point(aes(x = duration_ms,
+               y = genre)) +
+  labs(title = "duration(ms) vs genre",
+       x = "Duration(ms)", y = "Genre")
+
+
+artist_data %>%
+  ggplot() +
+  geom_bar(aes(x = song_price, fill = multiple_artists)) +
+  labs(title = "Songs price vs Songs with more than ONE artist", 
+       x = "Prices of songs($)", y = "Count")
+
+```
+
+There are `r nrow(my_data)` songs in the playlist.
+
+The total duration of my playlist is `r sum(my_data$duration_min)` minutes.
+
+The average price of songs in my playlist is `r mean(my_data$song_price)` dollars.
+
+## SQL examples
+
+```
+SELECT duration_ms, COUNT(*)
+FROM tbl_songs
+GROUP BY duration_ms;
+
+SELECT DISTINCT artist
+FROM tbl_songs
+LIMIT 20;
+
+```
+
+The first example is similar to the data manipulation used to create my data frame as I rearranged my initial_playlist with duration_ms in my final playlist (my_playlist). The second example is similar to the data manipulation used to create my data frame as I only included unique artists in my final playlist. My final playlist also only had 20 songs, therefore, in the SQL code I set the limit to 20.
+
+## Learning reflection
+
+One important thing I learned from module 3 is how to use SQL queries. This module taught us how to execute tidyverse code in SQL, which I found to be a useful skillset.
+In my project, I demonstrated creativity by incorporating graphics (bar charts) from previous assignments. Instead of creating a basic playlist that could have duplicated songs, I went beyond and included only unique artists in my final playlist of 20 songs. This allowed for more variability in the data and graphics when exploring the playlist data since there were no repeat artists or songs.
+I am interested in further exploring database tables because I believe they are practical and useful. The use of primary/foreign keys makes storing data efficient and simple, and the linking properties of primary keys are fascinating.
+As someone who enjoys coding and has experience with different coding programs, I find SQL to be a unique type of coding software that differs from basic coding programs like Python or Java. This makes it extremely intriguing to me, and I am curious to learn more about it.
+
+## Appendix
+```{r file='exploration.R', eval=FALSE, echo=TRUE}
+
+```
+
+## Redemption
+
+```{css, echo = FALSE}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Mukta:wght@200&display=swap');
+p {font-family: 'Montserrat', sans-serif;
+}
+
+body {font-family: 'Mukta', sans-serif;
+      font-weight: bold;
+      background-color: #cebdde;
+}
+```
+
+I have included css from the previous assignments which has not been asked in any parts. The css gives my html page some color and *character* to the text. I chose a color that I thought correlates to the party theme of my playlist.
+
+```{r, message=FALSE, echo = FALSE}
+library(magick)
+data <- read_csv("my_playlist.csv")
+cover <- image_read("https://img.freepik.com/free-vector/gradient-colorful-disco-ball_23-2148913433.jpg") %>%
+  image_scale(500) %>%
+  image_annotate(text = "Matthew's Party \nPlaylist",
+                 color = "#FFFFFF",
+                 size = 40,
+                 font = "Impact",
+                 gravity = "center")
+cover
+```
+
+I designed a cover for my playlist using R, demonstrating my ability to create custom images that aren't just memes. By using the same method of code, I can apply this skill to other projects as well.
